@@ -8,3 +8,6 @@ class Events(models.Model):
     tickets_field = models.IntegerField()
     date_field = models.DateField()
 
+class Tickets(models.Model):
+    ticket_token = models.BooleanField(default=False)
+    event = models.ForeignKey(Events, on_delete=models.CASCADE)
