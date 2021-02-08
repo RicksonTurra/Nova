@@ -21,7 +21,10 @@
                 <div>
                     <a href="{% url 'nova_app:create' %}" class="btn btn-info">Create New Event</a>
                 </div>
+            </div>
+            <div class="main col-lg-10 col-md-9">
                 {% block body %}
+                {{ date }}
                 {% endblock %}
             </div>
         </div>

@@ -26,3 +26,8 @@ body {
     margin-right: auto;
     margin-bottom: 50px;
 }
+
+#name {
+    color:chartreuse;
+    font-weight: bold;
+}
