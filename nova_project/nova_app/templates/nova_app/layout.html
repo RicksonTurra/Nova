@@ -1,0 +1,26 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+
+<html lang="eng">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'nova_app/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="row" style="width:100vw">
+            <div class="sidebar col-lg-2 col-md-3">
+                <div class="header-tickets">
+                    <img class="header-tickets" src="{% static 'nova_app/ticket.png' %}">
+                </div>
+                <div>
+                    <a id="link" href="{% url 'nova_app:index' %}" class="btn btn-info">Home</a>
+                </div>
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

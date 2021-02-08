@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    background-color: #b6d2cc;
+}
+
+.sidebar {
+    background-color: #dcece7;
+    height: 100vh;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-top: 5px;
+}
+
+.btn {
+    margin: 8px;
+    color: #2d2c2c;
+    font-weight: bold;
+}
+
+.header-tickets {
+    display: block;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+}
