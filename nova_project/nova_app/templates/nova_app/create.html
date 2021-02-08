@@ -1,13 +1,22 @@
 {% extends "nova_app/layout.html" %}
-
-{% block title%}
+{% load static %}
+{% block title %}
     Create Event
 {% endblock %}
 
 {% block body %}
-    <div>
-        {{ form }}
-        <button type="button">Submit</button>
-    </div>
+    <form action="{% url 'nova_app:create' %}" method="post">
+        {% csrf_token %}
+        <div>
+            {{ form }}
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+{% endblock %}
 
+{% block script %}
+    <script src="{% static 'nova_app/create.js' %}"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 {% endblock %}
