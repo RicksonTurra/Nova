@@ -7,4 +7,4 @@ class Events(models.Model):
     name_field = models.CharField(max_length=200)
     tickets_field = models.IntegerField()
     date_field = models.DateField()
-
+    
