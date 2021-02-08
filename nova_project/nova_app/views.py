@@ -7,3 +7,5 @@ from django.shortcuts import render, redirect
 def index(request):
     return render(request, "nova_app/index.html")
 
+def create(request):
+    return render(request, "nova_app/create.html")
