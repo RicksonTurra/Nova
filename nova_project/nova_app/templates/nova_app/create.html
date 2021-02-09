@@ -1,5 +1,6 @@
 {% extends "nova_app/layout.html" %}
 {% load static %}
+
 {% block title %}
     Create Event
 {% endblock %}
@@ -9,7 +10,7 @@
         {% csrf_token %}
         <div>
             {{ form }}
-            <button type="submit">Submit</button>
+            <button  type="submit">Submit</button>
         </div>
     </form>
 {% endblock %}
