@@ -8,6 +8,13 @@ class Events(models.Model):
     tickets_field = models.IntegerField()
     date_field = models.DateField()
 
+    def __str__(self):
+        return f"{self.name_field} {self.tickets_field} {self.date_field}"
+
 class Tickets(models.Model):
-    ticket_token = models.BooleanField(default=False)
-    event = models.ForeignKey(Events, on_delete=models.CASCADE)
+    ticket_redeem = models.BooleanField(default=False)
+    ticket_token = models.IntegerField()
+    event = models.ForeignKey(Events, on_delete=models.CASCADE, default = None, null = True, blank = True)
+
+    def __str__(self):
+        return f"redeemed: {self.ticket_redeem} number of tickets: {self.ticket_token}"
