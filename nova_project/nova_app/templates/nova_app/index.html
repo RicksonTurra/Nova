@@ -8,7 +8,7 @@
 {% block body %}
     {% for token in tokens %}
         <div>
-            <form>
+            <form id="check_event" action="{% url 'nova_app:event' token.ticket_token %}" method="get">
                 {% for each in events %}
                     <ul>
                         <li><p>Name: {{each.name_field}}</p></li>
