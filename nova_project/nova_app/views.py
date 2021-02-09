@@ -7,15 +7,8 @@ from .forms import EventForm
 
 
 def index(request):
-    event = Events.objects.all()
-    token = Tickets.objects.all()
-    for each in token:
-        print(each.ticket_token)
 
-    return render(request, "nova_app/index.html", {
-        'events': event,
-        'tokens': token,
-    })
+    return render(request, "nova_app/index.html")
 
 def create(request):
     if request.method == "POST":
@@ -39,8 +32,7 @@ def create(request):
                 token = str(id_event) + "-" + str(each+1)
                 event_token = Tickets(ticket_redeem = False, ticket_token = token, event = event_from_table)
                 event_token.save()
-                last_ticket = Tickets.objects.all().last().ticket_token
-                print(last_ticket)
+                
             
             return HttpResponseRedirect(reverse("nova_app:index"))
     else:
@@ -53,5 +45,11 @@ def create(request):
     })
 
 def check(request, ticketIdentifier):
-    pass
+    event = Tickets.objects.get(ticket_token = ticketIdentifier)
+    event_name = event.event
+    print(event_name)
+
+    return render(request, "nova_app/event.html", {
+        'event_itself':event_name
+    })
 
