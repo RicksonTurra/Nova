@@ -1,8 +1,28 @@
 {% extends "nova_app/layout.html" %}
+{% load static %}
 
 {% block title%}
     Tickets
 {% endblock %}
 
 {% block body %}
+    {% for token in tokens %}
+        <div>
+            <form>
+                {% for each in events %}
+                    <ul>
+                        <li><p>Name: {{each.name_field}}</p></li>
+                        <button type="submit">Check</button>
+                    </ul>
+                {% endfor %}
+            </form>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'nova_app/index.js' %}"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 {% endblock %}

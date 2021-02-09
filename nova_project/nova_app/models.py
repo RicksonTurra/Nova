@@ -13,8 +13,8 @@ class Events(models.Model):
 
 class Tickets(models.Model):
     ticket_redeem = models.BooleanField(default=False)
-    ticket_token = models.IntegerField()
+    ticket_token = models.CharField(max_length=200)
     event = models.ForeignKey(Events, on_delete=models.CASCADE, default = None, null = True, blank = True)
 
     def __str__(self):
-        return f"redeemed: {self.ticket_redeem} number of tickets: {self.ticket_token}"
+        return f"redeemed: {self.ticket_redeem} Token: {self.ticket_token}"

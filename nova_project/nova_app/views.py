@@ -7,7 +7,15 @@ from .forms import EventForm
 
 
 def index(request):
-    return render(request, "nova_app/index.html")
+    event = Events.objects.all()
+    token = Tickets.objects.all()
+    for each in token:
+        print(each.ticket_token)
+
+    return render(request, "nova_app/index.html", {
+        'events': event,
+        'tokens': token,
+    })
 
 def create(request):
     if request.method == "POST":
@@ -22,10 +30,14 @@ def create(request):
             # Get last event - required because there could be events with repeated name
             event_from_table = event_from_table.last()
 
-            # Create unique token (id) for each ticket bounded to the last event
+            # Get id of last event
+            id_event = event_from_table.id
+
+            # Create unique token for each ticket bounded to the last event
             number_tickets = event_from_table.tickets_field
             for each in range(0, number_tickets):
-                event_token = Tickets(ticket_redeem = False, ticket_token = each+1, event = event_from_table)
+                token = str(id_event) + "-" + str(each+1)
+                event_token = Tickets(ticket_redeem = False, ticket_token = token, event = event_from_table)
                 event_token.save()
                 last_ticket = Tickets.objects.all().last().ticket_token
                 print(last_ticket)
@@ -40,5 +52,6 @@ def create(request):
         "form": form,
     })
 
-
+def check(request, ticketIdentifier):
+    pass
 
