@@ -14,7 +14,7 @@ function load_events(){
     // console.log(response);
     response = JSON.parse(response);
     response.forEach(show_events);
-    })    
+    });    
 }
     
 function show_events(all_events){
@@ -35,7 +35,7 @@ function show_events(all_events){
     const event_button = document.createElement('input');
     // Set attributes to button
     event_button.setAttribute('type', 'submit');
-    event_button.setAttribute('onclick', `load_id(${all_events})`);
+    event_button.setAttribute('onclick', `load_id(${name})`);
     event_button.setAttribute('value', 'Check');
     event_button.setAttribute('id', 'check');
     event_button.className = 'btn btn-primary btn-lg'
@@ -44,3 +44,7 @@ function show_events(all_events){
     // Add div to DOM
     document.querySelector('#events-view').append(name_div);
 }
+
+// function load_id(event){
+//     window.location.href = "/redeem/hello";
+// }

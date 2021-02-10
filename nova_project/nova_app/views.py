@@ -52,13 +52,29 @@ def create(request):
         "form": form,
     })
 
-def check(request, ticketIdentifier):
-    event = Tickets.objects.get(ticket_token = ticketIdentifier)
-    event_name = event.event
-    print(event_name)
+def check(request, eventName):
+    event = Events.objects.get(name_field = eventName)
+    event_name = event.name_field
+    number_tickets = event.tickets_field
+    number_redeemed = 0
+    # Calculate the amount of tickets redemeed
+    for number in range (1, number_tickets+1):
+        # Define variable with the value of a token
+        token = f"{event.id}-{number}"
+        ticket = Tickets.objects.get(ticket_token = token)
+        redeem = ticket.ticket_redeem
+        # If ticket was redeemed add one more to the count of tickets redemeed
+        if redeem == True:
+            number_redeemed += 1
+
+    
+    print(event)
 
     return render(request, "nova_app/event.html", {
-        'event_itself':event_name
+        'event_name':event_name,
+        'redeem': number_redeemed,
+        'number': number_tickets,
+
     })
 
 def show_all(request):
