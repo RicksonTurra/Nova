@@ -1,22 +1,22 @@
 {% extends "nova_app/layout.html" %}
 {% load static %}
 
-{% block title %}
-    Create Event
+{% block title%}
+   Each Event
 {% endblock %}
 
 {% block body %}
-    <form action="{% url 'nova_app:create' %}" method="post">
-        {% csrf_token %}
-        <div>
-            {{ form }}
-            <button  type="submit">Submit</button>
-        </div>
-    </form>
+    <h1>Hello</h1>
+    <p>Event: {{event_name}}</p>
+    <p>Number of tickets: {{number}}</p>
+    <p>Redeemed: {{redeem}}</p>
+    <div id="each-view">
+                
+    </div>
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'nova_app/create.js' %}"></script>
+    <script src="{% static 'nova_app/event.js' %}"></script>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
