@@ -1,6 +1,8 @@
+import json
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
+from django.core import serializers
 from django import forms
 from .models import Events, Tickets
 from .forms import EventForm
@@ -9,6 +11,12 @@ from .forms import EventForm
 def index(request):
 
     return render(request, "nova_app/index.html")
+
+
+def show_events(request):
+    events_iterate = Events.objects.all()
+    events_json = serializers.serialize('json', events_iterate)
+    return JsonResponse( events_json , safe=False)
 
 def create(request):
     if request.method == "POST":
@@ -52,4 +60,7 @@ def check(request, ticketIdentifier):
     return render(request, "nova_app/event.html", {
         'event_itself':event_name
     })
+
+def show_all(request):
+    return render(request, "nova_app/show_all.html")
 
