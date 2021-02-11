@@ -1,11 +1,12 @@
 from .models import Events, Tickets
 import json
 # Get info about an specific event
-def info(eventName):
+def info(eventID):
     # Gets data from the database
-    event = Events.objects.get(name_field = eventName)
+    event = Events.objects.get(pk = eventID)
     event_name = event.name_field
     number_tickets = event.tickets_field
+    event_pk = event.pk
     number_redeemed = 0
     # Calculate the amount of tickets redemeed
     for number in range (1, number_tickets+1):
@@ -20,5 +21,6 @@ def info(eventName):
     number_redeemed = json.dumps(number_redeemed)
     event_name = json.dumps(event_name)
     number_tickets = json.dumps(number_tickets)
+    event_pk = json.dumps(event_pk)
 
-    return event_name, number_tickets, number_redeemed
+    return event_name, number_tickets, number_redeemed, event_pk

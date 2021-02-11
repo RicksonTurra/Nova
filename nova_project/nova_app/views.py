@@ -54,15 +54,17 @@ def create(request):
     })
 
 # Render info about a specific event
-def check(request, eventName):
+def check(request, event_pk):
     # receives event info
-    event_name, number_tickets, number_redeemed = util.info(eventName)
+    event_name, number_tickets, number_redeemed, event_pk = util.info(event_pk)
 
     # converts data from json back to python data
     number_redeemed = json.loads(number_redeemed)
     number_redeemed = int(number_redeemed)
-    event_name = json.loads(event_name)
+    event_pk = json.loads(event_pk)
     number_tickets = json.loads(number_tickets)
+    event_name = json.loads(event_name)
+
 
     #render page
     return render(request, "nova_app/event.html", {
@@ -93,3 +95,8 @@ def check_status(request, IDtoken):
     return render(request, "nova_app/status.html", {
         'token': IDtoken
     })
+
+
+# def redeem(request, token_id):
+#     result = Tickets.objects.get(pk = token_id)
+    
