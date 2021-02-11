@@ -32,10 +32,9 @@ function show_events(all_events){
     
 
     // Create button to check event
-    const event_button = document.createElement('input');
+    const event_button = document.createElement('button');
     // Set attributes to button
-    event_button.setAttribute('type', 'submit');
-    event_button.setAttribute('onclick', `load_id(${name})`);
+    // event_button.setAttribute('type', 'submit');
     event_button.setAttribute('value', 'Check');
     event_button.setAttribute('id', 'check');
     event_button.className = 'btn btn-primary btn-lg'
@@ -43,8 +42,12 @@ function show_events(all_events){
 
     // Add div to DOM
     document.querySelector('#events-view').append(name_div);
+    
 }
-
-// function load_id(event){
-//     window.location.href = "/redeem/hello";
-// }
+// document.getElementById('check').addEventListener('click', `load_id(${name})`);
+event_button.setAttribute('onclick', `load_id(${name})`);
+function load_id(){
+    console.log('ola')
+    console.log(`${name}`);
+    window.location.replace(`/event`);
+}

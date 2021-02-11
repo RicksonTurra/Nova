@@ -17,8 +17,4 @@ class Tickets(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE, default = None, null = True, blank = True)
 
     def __str__(self):
-<<<<<<< HEAD
-        return f"redeemed: {self.ticket_redeem} number of tickets: {self.ticket_token}"
-=======
         return f"redeemed: {self.ticket_redeem} Token: {self.ticket_token}"
->>>>>>> new_feature

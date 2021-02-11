@@ -6,6 +6,7 @@ from django.core import serializers
 from django import forms
 from .models import Events, Tickets
 from .forms import EventForm
+from . import util
 
 
 def index(request):
@@ -52,31 +53,43 @@ def create(request):
         "form": form,
     })
 
+# Render info about a specific event
 def check(request, eventName):
-    event = Events.objects.get(name_field = eventName)
-    event_name = event.name_field
-    number_tickets = event.tickets_field
-    number_redeemed = 0
-    # Calculate the amount of tickets redemeed
-    for number in range (1, number_tickets+1):
-        # Define variable with the value of a token
-        token = f"{event.id}-{number}"
-        ticket = Tickets.objects.get(ticket_token = token)
-        redeem = ticket.ticket_redeem
-        # If ticket was redeemed add one more to the count of tickets redemeed
-        if redeem == True:
-            number_redeemed += 1
+    # receives event info
+    event_name, number_tickets, number_redeemed = util.info(eventName)
 
-    
-    print(event)
+    # converts data from json back to python data
+    number_redeemed = json.loads(number_redeemed)
+    number_redeemed = int(number_redeemed)
+    event_name = json.loads(event_name)
+    number_tickets = json.loads(number_tickets)
 
+    #render page
     return render(request, "nova_app/event.html", {
         'event_name':event_name,
         'redeem': number_redeemed,
         'number': number_tickets,
 
     })
-
+#Show all events
 def show_all(request):
     return render(request, "nova_app/show_all.html")
 
+def refresh(request, name_event):
+    event_name, number_tickets, number_redeemed = util.info(name_event)
+
+    return JsonResponse(number_redeemed, safe=False)
+
+def ticket_status(request, tokenID):
+    # get the db entry to check if it was redeemed or not
+    entry = Tickets.objects.get(ticket_token = tokenID)
+    status = entry.ticket_redeem
+    if status == 0:
+        return JsonResponse({"status": "Ticket is OK"}, status=200)
+    else:
+        return JsonResponse({"status": "Ticket GONE"}, status=410)
+
+def check_status(request, IDtoken):
+    return render(request, "nova_app/status.html", {
+        'token': IDtoken
+    })

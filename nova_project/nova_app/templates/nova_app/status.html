@@ -6,21 +6,16 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Hello</h1>
-    <span>Event: </span> 
-    <span id="event_name">{{event_name}}</span>
-    <span>Number of tickets: </span>
-    <span>{{number}}</span>
-    <span>Redeemed: </span>
-    <span id="redeem-value">{{redeem}}</span>
     <div>
-    <button id="button_refresh" class="btn btn-outline-secondary" type="submit">Refresh</button>
+        <span>Token: </span>
+        <span id="token">{{token}}</span>
     </div>
-
+    <p id="status"></p>
+    
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'nova_app/event.js' %}"></script>
+    <script src="{% static 'nova_app/status.js' %}"></script>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
