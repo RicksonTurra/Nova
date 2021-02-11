@@ -71,14 +71,14 @@ def check(request, event_pk):
         'event_name':event_name,
         'redeem': number_redeemed,
         'number': number_tickets,
-
+        'id': event_pk
     })
 #Show all events
 def show_all(request):
     return render(request, "nova_app/show_all.html")
 
-def refresh(request, name_event):
-    event_name, number_tickets, number_redeemed = util.info(name_event)
+def refresh(request, id_event):
+    event_name, number_tickets, number_redeemed, event_pk = util.info(id_event)
 
     return JsonResponse(number_redeemed, safe=False)
 
@@ -97,6 +97,10 @@ def check_status(request, IDtoken):
     })
 
 
-# def redeem(request, token_id):
-#     result = Tickets.objects.get(pk = token_id)
-    
+def redeem(request, token):
+    result = Tickets.objects.get(ticket_token = token)
+    result.ticket_redeem = 1
+    result.save()
+    result = Tickets.objects.get(ticket_token = token)
+    print(result)
+    return JsonResponse({"status": "Ticket redeemed"}, status=201)
