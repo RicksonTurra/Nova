@@ -44,7 +44,7 @@ def create(request):
                 event_token.save()
                 
             
-            return HttpResponseRedirect(reverse("nova_app:index"))
+            return HttpResponseRedirect(reverse("nova_app:show_all"))
     else:
         form = EventForm()
     
@@ -85,12 +85,15 @@ def refresh(request, id_event):
 
 def ticket_status(request, tokenID):
     # get the db entry to check if it was redeemed or not
-    entry = Tickets.objects.get(ticket_token = tokenID)
-    status = entry.ticket_redeem
-    if status == 0:
-        return JsonResponse({"status": "Ticket is OK"}, status=200)
-    else:
-        return JsonResponse({"status": "Ticket GONE"}, status=410)
+    try:
+        entry = Tickets.objects.get(ticket_token = tokenID)
+        status = entry.ticket_redeem
+        if status == 0:
+            return JsonResponse({"status": "Ticket is OK"}, status=200)
+        else:
+            return JsonResponse({"status": "Ticket GONE"}, status=410)
+    except: 
+        return JsonResponse({"status": "Ticket does not exist"}, safe=False, status=400)
 
 def check_status(request, IDtoken):
     return render(request, "nova_app/status.html", {
@@ -109,6 +112,7 @@ def redeem(request, token):
 # Add tickets
 @csrf_exempt
 def add_ticket(request):
+    
     data = json.loads(request.body)
     pk_event = data.get("pkid", "")
     number_tickets = int(data.get("number", ""))
@@ -122,12 +126,6 @@ def add_ticket(request):
                 token = str(pk_event) + "-" + str(each+1)
                 event_token = Tickets(ticket_redeem = False, ticket_token = token, event = db_result)
                 event_token.save()
-    event_name, number_tickets, number_redeemed, event_pk = util.info(pk_event)
     # converts data from json back to python data
-    number_redeemed = json.loads(number_redeemed)
-    number_redeemed = int(number_redeemed)
-    event_pk = json.loads(event_pk)
-    number_tickets = json.loads(number_tickets)
-    event_name = json.loads(event_name)
-    print("OLAAAA")
-    return JsonResponse(number_redeemed, safe=False)
+    final_range = json.loads(final_range)
+    return JsonResponse(final_range, safe=False, status = 200)

@@ -7,7 +7,13 @@
 
 {% block body %}
         <div id="index-view">
-            
+            <div>
+                <span>Token: </span>
+                <span id="token">{{token}}</span>
+            </div>
+            <p id="status"></p>
+            <div>
+                <button id="redeem" type="button" disabled="true" class="btn btn-outline-secondary">Redeem</button>
         </div>
 {% endblock %}
 
