@@ -109,13 +109,14 @@ def redeem(request, token):
 # Add tickets
 @csrf_exempt
 def add_ticket(request):
-    print("AKIIIIIIIIIIII")
     data = json.loads(request.body)
     pk_event = data.get("pkid", "")
     number_tickets = int(data.get("number", ""))
     db_result = Events.objects.get(id = pk_event)    
     number_existent = db_result.tickets_field
     final_range = number_existent + number_tickets
+    db_result.tickets_field = final_range
+    db_result.save()
      # Create unique token for each ticket bounded to the event
     for each in range(number_existent, final_range):
                 token = str(pk_event) + "-" + str(each+1)
@@ -128,4 +129,5 @@ def add_ticket(request):
     event_pk = json.loads(event_pk)
     number_tickets = json.loads(number_tickets)
     event_name = json.loads(event_name)
+    print("OLAAAA")
     return JsonResponse(number_redeemed, safe=False)
