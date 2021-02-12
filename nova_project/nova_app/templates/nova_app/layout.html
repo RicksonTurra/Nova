@@ -12,8 +12,12 @@
         {% endblock %}
     </head>
     <body>
-        <div class="row" style="width:100vw">
-            <div class="sidebar col-lg-2 col-md-3">
+        <div style="width: 1000px;">
+            <div style="display:inline-block; 
+                        width:200px;
+                        height:100vh;
+                        background-color: #dcece7;
+                        text-align: center;">
                 <div class="header-tickets">
                     <img class="header-tickets" src="{% static 'nova_app/ticket.png' %}">
                 </div>
@@ -26,10 +30,13 @@
                 <div>
                     <a id="events" href="{% url 'nova_app:show_all' %}" class="btn btn-info">Show Events</a>
                 </div>
-                <input type="text" id="check" placeholder="Type your ticket Token">
             </div>
             
-            <div class="main col-lg-10 col-md-9">
+            <div style="display:inline-block; 
+                        width:80vw; 
+                        position:absolute;
+                        text-align: center;
+                        margin-top: 100px">
                 {% block body %}
                 {{ date }}
                 {% endblock %}

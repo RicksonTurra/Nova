@@ -12,3 +12,9 @@ class EventForm(forms.ModelForm):
         widgets = {
             'date_field': DateInput(),
         }
+
+        labels={
+            "name_field": "Name",
+            "tickets_field": "Tickets",
+            "date_field": "Date"
+        }
