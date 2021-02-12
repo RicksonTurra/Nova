@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-
+from django.core.validators import MinValueValidator
 # Create your models here.
 class Events(models.Model):
     name_field = models.CharField(max_length=200)
-    tickets_field = models.IntegerField()
+    tickets_field = models.IntegerField(validators = [MinValueValidator(limit_value=0)])
     date_field = models.DateField()
 
     def __str__(self):

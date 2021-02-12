@@ -17,7 +17,7 @@
     <button id="button_refresh" class="btn btn-outline-secondary" type="submit">Refresh</button>
     <form id="tickets-form" method="post">
         {% csrf_token %}
-        <input type="number" id="tickets" placeholder="Number of tickets">
+        <input type="number" id="tickets" min="0" placeholder="Number of tickets">
         <button id="add" type="submit" class="btn btn-primary">Add Ticket</button>
     </form>
 
