@@ -13,5 +13,6 @@ urlpatterns = [
     path("event/refresh/<str:id_event>", views.refresh, name="refresh"),
     path("status/response/<str:tokenID>", views.ticket_status, name="status"),
     path("status/<str:IDtoken>", views.check_status, name="check_status"),
-    path("redeem/<str:token>", views.redeem, name="redeem")
+    path("redeem/<str:token>", views.redeem, name="redeem"),
+    path("add", views.add_ticket, name="add")
 ]

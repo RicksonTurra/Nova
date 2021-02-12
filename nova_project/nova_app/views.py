@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.core import serializers
 from django import forms
 from .models import Events, Tickets
+from django.views.decorators.csrf import csrf_exempt
 from .forms import EventForm
 from . import util
 
@@ -96,7 +97,7 @@ def check_status(request, IDtoken):
         'token': IDtoken
     })
 
-
+# Redeem a ticket
 def redeem(request, token):
     result = Tickets.objects.get(ticket_token = token)
     result.ticket_redeem = 1
@@ -104,3 +105,21 @@ def redeem(request, token):
     result = Tickets.objects.get(ticket_token = token)
     print(result)
     return JsonResponse({"status": "Ticket redeemed"}, status=201)
+
+# Add tickets
+@csrf_exempt
+def add_ticket(request):
+    data = json.loads(request.body)
+    pk_event = data.get("pkid", "")
+    number_tickets = int(data.get("number", ""))
+    db_result = Events.objects.get(pk = pk_event)
+    db_result.tickets_field = number_tickets
+    db_result.save()
+    event_name, number_tickets, number_redeemed, event_pk = util.info(id_event)
+    print("AKIIIIIIIIIIII")
+    return render(request, "nova_app/event.html", {
+        'event_name':event_name,
+        'redeem': number_redeemed,
+        'number': number_tickets,
+        'id': event_pk
+    })

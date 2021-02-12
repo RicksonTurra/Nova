@@ -15,7 +15,13 @@
     <span id="id-event" hidden>{{id}}</span>
     <div>
     <button id="button_refresh" class="btn btn-outline-secondary" type="submit">Refresh</button>
-    <button id="add" type="button" class="btn btn-primary">Add Ticket</button>
+    <form id="tickets-form" method="post">
+        {% csrf_token %}
+        <input type="number" id="tickets" placeholder="Number of tickets">
+        <button id="add" type="submit" class="btn btn-primary">Add Ticket</button>
+    </form>
+
+    
     </div>
 
 
