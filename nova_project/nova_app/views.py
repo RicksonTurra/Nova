@@ -109,17 +109,23 @@ def redeem(request, token):
 # Add tickets
 @csrf_exempt
 def add_ticket(request):
+    print("AKIIIIIIIIIIII")
     data = json.loads(request.body)
     pk_event = data.get("pkid", "")
     number_tickets = int(data.get("number", ""))
-    db_result = Events.objects.get(pk = pk_event)
-    db_result.tickets_field = number_tickets
-    db_result.save()
-    event_name, number_tickets, number_redeemed, event_pk = util.info(id_event)
-    print("AKIIIIIIIIIIII")
-    return render(request, "nova_app/event.html", {
-        'event_name':event_name,
-        'redeem': number_redeemed,
-        'number': number_tickets,
-        'id': event_pk
-    })
+    db_result = Events.objects.get(id = pk_event)    
+    number_existent = db_result.tickets_field
+    final_range = number_existent + number_tickets
+     # Create unique token for each ticket bounded to the event
+    for each in range(number_existent, final_range):
+                token = str(pk_event) + "-" + str(each+1)
+                event_token = Tickets(ticket_redeem = False, ticket_token = token, event = db_result)
+                event_token.save()
+    event_name, number_tickets, number_redeemed, event_pk = util.info(pk_event)
+    # converts data from json back to python data
+    number_redeemed = json.loads(number_redeemed)
+    number_redeemed = int(number_redeemed)
+    event_pk = json.loads(event_pk)
+    number_tickets = json.loads(number_tickets)
+    event_name = json.loads(event_name)
+    return JsonResponse(number_redeemed, safe=False)

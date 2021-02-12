@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("button_refresh").addEventListener('click', refreshButton);
-    document.getElementById("tickets-form").addEventListener('submit', function(e){
+    document.getElementById("tickets-form").addEventListener('submit', () => {
         const id_event = document.getElementById("id-event").innerHTML;
         const numberTickets = document.getElementById("tickets").value;
         console.log(numberTickets)
@@ -10,9 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 pkid: `${id_event}`,
                 number: `${numberTickets}`,
             })
-          })    
+            .then(response => response.json())
+            .then(response => {
+            // Print result
+            console.log(response);
+            document.getElementById("number-tickets").innerHTML = response
+            })
         });
-
 });
 
 function refreshButton(){
