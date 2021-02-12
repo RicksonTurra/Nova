@@ -1,0 +1,5 @@
+As mentioned in the README, I have used Django and SQLite for specific reasons.
+
+I have decided to use Django because it provides safety and ready to use forms and models. 
+
+In general, I believe the design of the app and the README can provide a batter explanation.
