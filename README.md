@@ -24,7 +24,7 @@ In case the ticket has not been redeemed, there is going to be a button allowing
 
 The endpoint to redeem a ticket is ```redeem/<str:token>```.
 
-The system was created using Django ans SQLite database - the reason why I have used SQLite database is that this app is supposed to contain only one user and Django has the ability to build the database itself.
+The system was created using Django and SQLite database - the reason why I have used SQLite database is that this app is supposed to contain only one user and Django has the ability to build the database itself.
 
 It has been dockerised.
 
