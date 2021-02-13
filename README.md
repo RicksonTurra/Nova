@@ -21,6 +21,7 @@ Each ticket is represented by a unique token - and has the following format "{"e
 The system has a page to check the status of a specific ticket - which is reached through the route ```/status/<str:ticket_token>``` ==> something like "/status/2-4".
 From this page, the user is going to have acces to whether a ticket has been redeemed or not - in case it has, it is going to render the message "Ticket GONE"; in case it has not, it is going to render the message "Ticket OK". And, last case scenario, if the does not exist, the message "Ticket does not exist" is going to be rendered.
 In case the ticket has not been redeemed, there is going to be a button allowing the user to redeem such ticket.
+There is also an search field on the home page to check the status a specific ticket - type in the the ticket token and press Enter to check it.
 
 The endpoint to redeem a ticket is ```redeem/<str:token>```.
 
