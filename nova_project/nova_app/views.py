@@ -127,5 +127,5 @@ def add_ticket(request):
                 event_token = Tickets(ticket_redeem = False, ticket_token = token, event = db_result)
                 event_token.save()
     # converts data from json back to python data
-    final_range = json.loads(final_range)
+    final_range = json.loads(str(final_range))
     return JsonResponse(final_range, safe=False, status = 200)
