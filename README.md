@@ -19,9 +19,9 @@ From this page, it is also possible to add more tickets to this particular event
 Each ticket is represented by a unique token - and has the following format "{"event_id"+"-"+"number"} ==> something like {3-1} for the event 3 with identification 1; so, ticket "3-1".
 
 The system has a page to check the status of a specific ticket - which is reached through the route ```/status/<str:ticket_token>``` ==> something like "/status/2-4".
-From this page, the user is going to have acces to whether a ticket has been redeemed or not - in case it has, it is going to render the message "Ticket GONE"; in case it has not, it is going to render the message "Ticket OK". And, last case scenario, if the does not exist, the message "Ticket does not exist" is going to be rendered.
+From this page, the user is going to have acces to whether a ticket has been redeemed or not - in case it has, it is going to render the message "Ticket GONE"; in case it has not, it is going to render the message "Ticket OK". And, last case scenario, if the ticket does not exist, the message "Ticket does not exist" is going to be rendered.
 In case the ticket has not been redeemed, there is going to be a button allowing the user to redeem such ticket.
-There is also an search field on the home page to check the status a specific ticket - type in the the ticket token and press Enter to check it.
+There is also a search field on the home page to check the status a specific ticket - type in the the ticket token and press Enter to check it.
 
 The endpoint to redeem a ticket is ```redeem/<str:token>```.
 
@@ -29,7 +29,7 @@ The system was created using Django and SQLite database - the reason why I have 
 
 It has been dockerised.
 
-In order to run the app, run ```docker-compose up``` from the Nova folder.  
+In order to run the app, run ```docker compose up``` from the Nova folder.  
 
 
 
